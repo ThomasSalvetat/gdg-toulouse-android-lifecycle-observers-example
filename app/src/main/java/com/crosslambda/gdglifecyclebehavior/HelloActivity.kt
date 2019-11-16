@@ -7,11 +7,12 @@ class HelloActivity : BaseActivity<HelloContractView, HelloPresenter>(HelloPrese
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hello)
         textView.setOnClickListener { presenter.getMessage() }
     }
 
     override fun getView(): HelloContractView = this
+    override fun getCustomTitle(): Int = R.string.custom_title
+    override fun getLayout(): Int = R.layout.activity_hello
 
     override fun showMessage(message: String) {
         textView.text = message

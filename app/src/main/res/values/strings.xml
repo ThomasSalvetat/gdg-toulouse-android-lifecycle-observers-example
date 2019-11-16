@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GDG Lifecycle Observers</string>
+    <string name="custom_title">Banana</string>
 </resources>
