@@ -1,12 +1,9 @@
 package com.crosslambda.gdglifecyclebehavior
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_hello.*
 
-class HelloActivity : AppCompatActivity(), HelloContractView {
-
-    private val presenter = HelloPresenter()
+class HelloActivity : BaseActivity<HelloContractView, HelloPresenter>(HelloPresenter()), HelloContractView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,15 +11,7 @@ class HelloActivity : AppCompatActivity(), HelloContractView {
         textView.setOnClickListener { presenter.getMessage() }
     }
 
-    override fun onStart() {
-        super.onStart()
-        presenter.subscribe(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenter.unsubscribe()
-    }
+    override fun getView(): HelloContractView = this
 
     override fun showMessage(message: String) {
         textView.text = message

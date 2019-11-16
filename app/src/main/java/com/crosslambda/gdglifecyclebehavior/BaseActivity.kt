@@ -2,8 +2,8 @@ package com.crosslambda.gdglifecyclebehavior
 
 import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivity<out T>(private val presenter: ContractPresenter<T>) :
-    AppCompatActivity() where T : ContractView {
+abstract class BaseActivity<T, S>(protected val presenter: S) :
+    AppCompatActivity() where T : ContractView, S: ContractPresenter<T> {
 
     override fun onStart() {
         super.onStart()
