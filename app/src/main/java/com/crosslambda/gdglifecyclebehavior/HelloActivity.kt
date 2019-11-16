@@ -3,7 +3,7 @@ package com.crosslambda.gdglifecyclebehavior
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_hello.*
 
-class HelloActivity : BaseActivity<HelloContractView, HelloPresenter>(HelloPresenter()), HelloContractView {
+class HelloActivity : PresenterActivity<HelloContractView, HelloContractPresenter>(HelloPresenter()), HelloContractView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

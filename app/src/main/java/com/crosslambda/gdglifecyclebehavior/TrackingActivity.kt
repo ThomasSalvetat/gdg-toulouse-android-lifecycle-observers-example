@@ -1,15 +1,13 @@
 package com.crosslambda.gdglifecyclebehavior
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivity :
-    AppCompatActivity() {
+abstract class TrackingActivity : CustomHeaderActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayout())
+        TrackingService.track(getName())                // TRACKING
     }
 
-    abstract fun getLayout(): Int
+    abstract fun getName(): String
 }
