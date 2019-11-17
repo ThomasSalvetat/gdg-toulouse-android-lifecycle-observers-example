@@ -1,9 +1,14 @@
 package com.crosslambda.gdglifecyclebehavior
 
-class TrackingBehavior(
-    private val contract: Contract
-) {
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 
+class TrackingBehavior(
+    private val contract: TrackingBehavior.Contract
+) : LifecycleObserver {
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         TrackingService.track(contract.getName()) // TRACKING
     }

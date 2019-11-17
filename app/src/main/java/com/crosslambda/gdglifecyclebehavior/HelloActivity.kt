@@ -9,7 +9,7 @@ class HelloActivity : BaseActivity(),
     TrackingBehavior.Contract,
     PresenterBehavior.Contract<HelloContractView> {
 
-    private val customHeaderBehavior by lazy { CustomHeaderBehavior(this) }
+    private val customHeaderBehavior by lazy { CustomHeaderBehavior(this, this) }
     private val presenterBehavior by lazy { PresenterBehavior(HelloPresenter(), this) }
     private val trackingBehavior by lazy { TrackingBehavior(this) }
 
@@ -21,18 +21,11 @@ class HelloActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         textView.setOnClickListener { presenterBehavior.presenter.getMessage() }
-        customHeaderBehavior.onCreate(this)
-        trackingBehavior.onCreate()
-    }
 
-    override fun onStart() {
-        super.onStart()
-        presenterBehavior.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenterBehavior.onStop()
+        // Subscribe observer to lifecycle
+        lifecycle.addObserver(presenterBehavior)
+        lifecycle.addObserver(trackingBehavior)
+        lifecycle.addObserver(customHeaderBehavior)
     }
 
     override fun showMessage(message: String) {
