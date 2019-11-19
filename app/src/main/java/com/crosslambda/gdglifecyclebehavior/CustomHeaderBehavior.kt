@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
 class CustomHeaderBehavior(
-    private val contract: CustomHeaderBehavior.Contract,
+    private val contract: Contract,
     private val activity: Activity
 ) : LifecycleObserver {
 

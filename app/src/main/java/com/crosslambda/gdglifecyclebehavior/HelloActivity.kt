@@ -1,6 +1,7 @@
 package com.crosslambda.gdglifecyclebehavior
 
 import android.os.Bundle
+import com.crosslambda.gdglifecyclebehavior.behavior.*
 import kotlinx.android.synthetic.main.activity_hello.*
 
 class HelloActivity : BaseActivity(),
@@ -9,9 +10,14 @@ class HelloActivity : BaseActivity(),
     TrackingBehavior.Contract,
     PresenterBehavior.Contract<HelloContractView> {
 
-    private val customHeaderBehavior by lazy { CustomHeaderBehavior(this, this) }
-    private val presenterBehavior by lazy { PresenterBehavior(HelloPresenter(), this) }
-    private val trackingBehavior by lazy { TrackingBehavior(this) }
+    @Behavior
+    private val customHeaderBehavior by behaviorFactory { CustomHeaderBehavior(this, this) }
+
+    @Behavior
+    private val presenterBehavior by behaviorFactory { PresenterBehavior(HelloPresenter(), this) }
+
+    @Behavior
+    private val trackingBehavior by behaviorFactory { TrackingBehavior(this) }
 
     override fun getView(): HelloContractView = this
     override fun getCustomTitle(): Int = R.string.custom_title
@@ -21,11 +27,6 @@ class HelloActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         textView.setOnClickListener { presenterBehavior.presenter.getMessage() }
-
-        // Subscribe observer to lifecycle
-        lifecycle.addObserver(presenterBehavior)
-        lifecycle.addObserver(trackingBehavior)
-        lifecycle.addObserver(customHeaderBehavior)
     }
 
     override fun showMessage(message: String) {

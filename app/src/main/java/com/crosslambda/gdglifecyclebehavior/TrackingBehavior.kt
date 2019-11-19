@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
 class TrackingBehavior(
-    private val contract: TrackingBehavior.Contract
+    private val contract: Contract
 ) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
